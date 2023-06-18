@@ -1,0 +1,176 @@
+<!-- Created by Tejas Sharma -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RJGP Chatbot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* CSS code for Close Button */
+        #closeBtn {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: red;
+            cursor: pointer;
+        }
+        
+        #closeBtn:hover {
+            color: darkred;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="tejas.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        var chatContainer = null;
+
+        function openWebsite() {
+            chatContainer = document.getElementById('chatContainer');
+            chatContainer.style.display = 'none';
+
+            var iframeContainer = document.createElement('div');
+            iframeContainer.id = 'iframeContainer';
+            iframeContainer.style.position = 'fixed';
+            iframeContainer.style.top = '0';
+            iframeContainer.style.left = '0';
+            iframeContainer.style.width = '100%';
+            iframeContainer.style.height = '100%';
+            iframeContainer.style.zIndex = '9999';
+            iframeContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            iframeContainer.style.display = 'flex';
+            iframeContainer.style.justifyContent = 'center';
+            iframeContainer.style.alignItems = 'center';
+
+            var iframe = document.createElement('iframe');
+            iframe.src = 'https://rjgp.edu.in/';
+            iframe.style.border = 'none';
+            iframe.style.borderRadius = '15px';
+            iframe.style.width = '96%';
+            iframe.style.height = '80%';
+
+            var closeButton = document.createElement('a');
+            closeButton.id = 'iframeCloseBtn';
+            closeButton.textContent = 'X';
+            closeButton.href = '#';
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '10px';
+            closeButton.style.right = '10px';
+            closeButton.style.fontSize = '20px';
+            closeButton.style.color = 'red';
+            closeButton.style.cursor = 'pointer';
+
+            closeButton.addEventListener('click', function () {
+                closeWebsite();
+            });
+
+            iframeContainer.appendChild(iframe);
+            iframeContainer.appendChild(closeButton);
+            document.body.appendChild(iframeContainer);
+        }
+
+        function closeWebsite() {
+            if (chatContainer) {
+                document.body.removeChild(document.getElementById('iframeContainer'));
+                chatContainer.style.display = 'block';
+                chatContainer = null;
+            }
+        }
+
+        function showLoginForm() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('signupForm').style.display = 'none';
+        }
+
+        function showSignupForm() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'block';
+        }
+
+        function login() {
+            var username = document.getElementById('loginUsername').value;
+            var password = document.getElementById('loginPassword').value;
+
+            if (username === '' || password === '') {
+                swal('Error', 'Please enter username and password.', 'error');
+            } else {
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('chatContainer').style.display = 'block';
+                document.getElementById('logo').style.display = 'block';
+                swal('Welcome to the RJGP Chatbot, ' + username + '!', 'To visit the official website, simply click on the logo located in the top left corner.', 'success');
+            }
+        }
+
+        function signup() {
+            var username = document.getElementById('signupUsername').value;
+            var password = document.getElementById('signupPassword').value;
+
+            if (username === '' || password === '') {
+                swal('Error', 'Please enter username and password.', 'error');
+            } else {
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('chatContainer').style.display = 'block';
+                document.getElementById('logo').style.display = 'block';
+                swal('Welcome to the RJGP Chatbot, ' + username + '!', 'To visit the official website, simply click on the logo located in the top left corner.', 'success');
+            }
+        }
+
+        function send() {
+            var message = document.getElementById('msg').value;
+            if (message.trim() !== '') {
+                var messageElement = document.createElement('div');
+                messageElement.classList.add('right');
+                messageElement.textContent = message;
+                document.getElementById('messages').appendChild(messageElement);
+                document.getElementById('msg').value = '';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="formContainer">
+        <h2>Welcome to RJGP Chatbot</h2>
+        <div id="loginForm">
+            <h3>Login</h3>
+            <input type="text" id="loginUsername" placeholder="Username">
+            <br>
+            <input type="password" id="loginPassword" placeholder="Password">
+            <br>
+            <button onclick="login()">Login</button>
+            <button onclick="showSignupForm()">Signup</button>
+        </div>
+        <div id="signupForm" style="display: none;">
+            <h3>Signup</h3>
+            <input type="text" id="signupUsername" placeholder="Username">
+            <br>
+            <input type="password" id="signupPassword" placeholder="Password">
+            <br>
+            <input type="email" id="signupEmail" placeholder="Email">
+            <br>
+            <input type="text" id="signupFullName" placeholder="Full Name">
+            <br>
+            <input type="tel" id="signupPhone" placeholder="Phone Number">
+            <br>
+            <button onclick="signup()">Signup</button>
+            <button onclick="showLoginForm()">Go back to login</button>
+        </div>
+    </div>
+    <div id="chatContainer" style="display: none;">
+        <div id="chatHeader">
+            <a href="#" onclick="openWebsite()">
+                <img src="https://rjgp.edu.in/erp/assets/img/brand/logo.png" id="logo" width="30px" height="30px">
+            </a>
+            <span id="chatTitle">RJGP Chatbot</span>
+            <a href="#" onclick="closeWebsite()" id="closeBtn">X</a>
+        </div>
+        <div id="messages"></div>
+        <div id="inputSystem">
+            <input id="msg" type="text" placeholder="Type a message..." spellcheck="false" autocomplete="off">
+            <img id="sendIcon" src="https://img.myloview.com/stickers/send-icon-isolated-on-white-background-message-symbol-modern-simple-vector-icon-for-website-design-mobile-app-ui-vector-illustration-700-266092988.jpg" height="35px" width="35px" onclick="send()">
+        </div>
+    </div>
+    <script src="tejas.js"></script>
+</body>
+</html>

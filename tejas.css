@@ -1,0 +1,381 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+body {
+    background: linear-gradient(135deg, #6b73ff, #000dff);
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+#formContainer {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5vw;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+}
+
+#formContainer h2,
+#formContainer h3 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+#formContainer input[type="text"],
+#formContainer input[type="password"],
+#formContainer input[type="email"],
+#formContainer input[type="tel"],
+#formContainer button {
+    margin-top: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 14px;
+    transition: box-shadow 0.3s, background-color 0.3s;
+}
+
+#formContainer input[type="text"]:focus,
+#formContainer input[type="password"]:focus,
+#formContainer input[type="email"]:focus,
+#formContainer input[type="tel"]:focus {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+#formContainer input[type="text"]::placeholder,
+#formContainer input[type="password"]::placeholder,
+#formContainer input[type="email"]::placeholder,
+#formContainer input[type="tel"]::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#formContainer button {
+    cursor: pointer;
+    background-color: #4dabf7;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#formContainer button:hover {
+    background-color: #2f80ec;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#formContainer button:active {
+    transform: translateY(0);
+}
+
+#formContainer input[type="text"],
+#formContainer input[type="password"],
+#formContainer input[type="email"],
+#formContainer input[type="tel"] {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#formContainer input[type="text"]:focus,
+#formContainer input[type="password"]:focus,
+#formContainer input[type="email"]:focus,
+#formContainer input[type="tel"]:focus {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+#chatContainer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+#chatHeader {
+    background-color: #333;
+    padding: 10px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    overflow: hidden;
+}
+
+#chatHeader #logo {
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+#chatHeader #chatTitle {
+    flex-grow: 1;
+    font-size: 18px;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#chatHeader #closeBtn {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    margin-left: 10px;
+    display: none;
+}
+
+#messages {
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    padding: 10px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 50px;
+    word-break: break-word;
+}
+
+.message-container {
+    margin-bottom: 10px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.user-message,
+.bot-message {
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 85%;
+    word-wrap: break-word;
+    margin-bottom: 10px;
+}
+
+.bot-message {
+    background-color: #333;
+}
+
+#inputSystem {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: none;
+    border-top: 1px solid #8b8b8b;
+    background: #282c;
+    width: 100%;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+#msg {
+    flex-grow: 1;
+    border: none;
+    background: #282c34;
+    color: #fff;
+    font-size: 16px;
+    padding: 0 12px;
+    border-radius: 0;
+    outline: none;
+    transition: background-color 0.3s ease;
+    margin-right: 0;
+    width: calc(100% - 40px);
+    height: 26px;
+    box-sizing: border-box;
+}
+
+#msg:focus {
+    background-color: #3c3f41;
+}
+
+#msg::placeholder {
+    color: rgba(230, 226, 222, 0.7);
+    font-style: italic;
+    font-size: 16px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+}
+
+#msg::-webkit-input-placeholder {
+    color: rgba(230, 226, 222, 0.7);
+    font-style: italic;
+    font-size: 16px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+}
+
+#msg::-moz-placeholder {
+    color: rgba(230, 226, 222, 0.7);
+    font-style: italic;
+    font-size: 16px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+}
+
+#sendIcon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color: #333;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+#sendIcon:hover {
+    background-color: #2f7d58;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: rgb(30, 29, 29);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.msgContainer {
+    position: relative;
+    width: 100%;
+}
+
+#messages {
+    position: fixed;
+    width: 100%;
+    top: 15px;
+    overflow: auto;
+}
+
+.right {
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background: #000;
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    max-width: 85%;
+    height: auto;
+    overflow-wrap: break-word;
+    font-size: 15px;
+}
+
+.left {
+    padding: 10px;
+    padding-left: 18px;
+    padding-right: 15px;
+    background: #333;
+    display: inline-block;
+    position: absolute;
+    left: 10px;
+    max-width: 85%;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    font-size: 15px;
+}
+iframe {
+    -webkit-box-shadow: 1px 0 5px 1px rgba(255, 255, 255, 0.45);
+    -moz-box-shadow: 1px 0 5px 1px rgba(255, 255, 255, 0.45);
+    box-shadow: 1px 0 5px 1px rgba(255, 255, 255, 0.45);
+    border: none;
+    border-radius: 15px;
+    position: relative;
+    left: 4px;
+    width: 95%;
+    height: 40%;
+  }  
+#messages::-webkit-scrollbar {
+    background: rgba(255, 255, 255, 0.3);
+    width: 5px;
+}
+
+#messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.background-image {
+    background-color: #282c34;
+}
+
+.swal2-popup {
+    background: #282c34;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.swal2-header {
+    background: #333;
+    color: #fff;
+}
+
+.swal2-title {
+    color: #fff;
+}
+
+.swal2-content {
+    color: #fff;
+}
+
+.swal2-confirm {
+    background: #40996f;
+    color: #fff;
+}
+
+.swal2-cancel {
+    background: #666;
+    color: #fff;
+}
+
+.swal2-styled.swal2-confirm:hover {
+    background: #2f7d58;
+}
+
+.swal2-styled.swal2-cancel:hover {
+    background: #4d4d4d;
+}
+@media screen and (max-width: 767px) {
+    #msg {
+        font-size: 14px;
+        width: calc(100% - 35px);
+    }
+
+    #sendIcon {
+        width: 25px;
+        height: 25px;
+        right: 10px;
+    }
+}
+
